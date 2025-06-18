@@ -5,7 +5,7 @@ stages = [r'''
   |   |
   O   |
  /|\  |
- /    |
+ / \  |
       |
 =========
 ''', r'''
@@ -95,9 +95,9 @@ while not game_over:
     #  If lives goes down to 0 then the game should end, and it should print "You loose"
     if guess not in chosen_word:
         lives -= 1
-    elif lives == 0:
-        game_over = True
-        print("You loose")
+        if lives == 0:
+            game_over = True
+            print("You loose")
 
     if "_" not in display:
         game_over = True
