@@ -6,7 +6,6 @@ lives = 6
 print(hangman_logo)
 
 chosen_word = random.choice(word_list)
-print(chosen_word)
 
 placeholder = ""
 for letter in range(len(chosen_word)):
