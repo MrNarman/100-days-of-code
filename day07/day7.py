@@ -1,13 +1,22 @@
 import random
 
-stages = [''' 
-+---+
+stages = [r''' 
+  +---+
   |   |
   O   |
  /|\  |
  /    |
       |
-=========''', '''
+=========
+''', r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', r'''
   +---+
   |   |
   O   |
@@ -15,15 +24,7 @@ stages = ['''
       |
       |
 =========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
+''', r'''
   +---+
   |   |
   O   |
@@ -31,15 +32,15 @@ stages = ['''
       |
       |
 =========
-''', '''
- +---+
+''', r'''
+  +---+
   |   |
   O   |
   |   |
       |
       |
 =========
-''', '''
+''', r'''
   +---+
   |   |
   O   |
@@ -47,7 +48,7 @@ stages = ['''
       |
       |
 =========
-''', '''
+''', r'''
   +---+
   |   |
       |
@@ -57,7 +58,13 @@ stages = ['''
 =========
 ''']
 
+
 word_list = ["baboon", "camel", "bananas", "government", "president", "america"]
+
+# TODO-1 : Create a variable called lives to keep track of the number of lives left.
+#  Set 'lives' to equal 6
+lives = 6
+
 chosen_word = random.choice(word_list)
 print(chosen_word)
 
@@ -66,8 +73,6 @@ for letter in range(len(chosen_word)):
     placeholder += "_"
 print(placeholder)
 
-# TODO-1 : using a while loop let the user guess again and again
-
 game_over = False
 correct_letters = []
 
@@ -75,8 +80,6 @@ while not game_over:
     guess = input("Guess a letter: ").lower()
 
     display = ""
-
-    # TODO-2 : Change the for loop so that you keep the previous correct letter
 
     for letter in chosen_word:
         if letter == guess:
@@ -88,10 +91,22 @@ while not game_over:
             display += "_"
 
     print(display)
+    # TODO-2 : if guess is not in the chosen_word, then reduce lives by 1.
+    #  If lives goes down to 0 then the game should end, and it should print "You loose"
+    if guess not in chosen_word:
+        lives -= 1
+    elif lives == 0:
+        game_over = True
+        print("You loose")
 
     if "_" not in display:
         game_over = True
         print("You win")
+
+    # TODO-3 : Print the ASCII art from 'Stages'
+    #  that corresponds to the current number of 'lives' the user has remaining
+
+    print(stages[lives])
 
 
 
