@@ -2,10 +2,9 @@ import random
 import hangman_words
 import hangman_art
 
-# TODO-1 : Create a variable called lives to keep track of the number of lives left.
-#  Set 'lives' to equal 6
 lives = 6
 
+print(hangman_art.hangman_logo)
 chosen_word = random.choice(hangman_words.word_list)
 print(chosen_word)
 
@@ -32,8 +31,7 @@ while not game_over:
             display += "_"
 
     print(display)
-    # TODO-2 : if guess is not in the chosen_word, then reduce lives by 1.
-    #  If lives goes down to 0 then the game should end, and it should print "You loose"
+
     if guess not in chosen_word:
         lives -= 1
         if lives == 0:
@@ -43,9 +41,6 @@ while not game_over:
     if "_" not in display:
         game_over = True
         print("You win")
-
-    # TODO-3 : Print the ASCII art from 'Stages'
-    #  that corresponds to the current number of 'lives' the user has remaining
 
     print(hangman_art.stages[lives])
 
