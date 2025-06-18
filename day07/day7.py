@@ -1,71 +1,12 @@
 import random
-
-stages = [r''' 
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', r'''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', r'''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', r'''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========
-''', r'''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', r'''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', r'''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
-
-
-word_list = ["baboon", "camel", "bananas", "government", "president", "america"]
+import hangman_words
+import hangman_art
 
 # TODO-1 : Create a variable called lives to keep track of the number of lives left.
 #  Set 'lives' to equal 6
 lives = 6
 
-chosen_word = random.choice(word_list)
+chosen_word = random.choice(hangman_words.word_list)
 print(chosen_word)
 
 placeholder = ""
@@ -106,7 +47,7 @@ while not game_over:
     # TODO-3 : Print the ASCII art from 'Stages'
     #  that corresponds to the current number of 'lives' the user has remaining
 
-    print(stages[lives])
+    print(hangman_art.stages[lives])
 
 
 
