@@ -28,5 +28,11 @@ def decrypt(original_text, shift_amount):
 # TODO-3: Combine the 'encrypt' and 'decrypt' functions into a single function called caesar().
 #  Use the value of the user chosen direction variable to determine which functionality to use. Call the Caesar
 #  function instead of encrypt/decrypt and pass in all the three variables direction/text/shift
-# encrypt(original_text=text, shift_amount=shift)
-decrypt(original_text=text, shift_amount=shift)
+def caesar(direction_to_take):
+    if direction_to_take == 'encode':
+        encrypt(original_text=text, shift_amount=shift)
+    elif direction_to_take == 'decode':
+        decrypt(original_text=text, shift_amount=shift)
+    else:
+        print("Invalid choice!")
+caesar(direction)
