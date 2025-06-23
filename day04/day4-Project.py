@@ -59,4 +59,4 @@ elif user_choice == 2 and computer_choice == 1:
     print("You win! SCISSORS beats PAPER")
 
 else:
-    print("Invalid input")
+    print("Invalid input!")
