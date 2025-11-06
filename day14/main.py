@@ -8,14 +8,12 @@ detail_index_A = randint(0, 49)
 detail_index_B = randint(0, 49)
 game_continue = True
 
-# todo: print art and the comparison statements | Include also the score
 def main_game_structure(score):
     print(f"{logo}\nyour score is: {score}")
     get_data_A(detail_index_A)
     print(vs)
     get_data_B(detail_index_B)
 
-# todo: get data from game_data file to form the questions
 def get_data_A(index):
     """
         Gets data for statement A to be used for comparison.
@@ -37,7 +35,6 @@ while game_continue:
     # Call the function of the game
     main_game_structure(user_score)
 
-    # todo: get comparisons for statements A and B
     user_guess = input("Who has more followers? Type 'A' or 'B': ").lower()
 
     def check_answer(user_input, followers_A, followers_B):
@@ -46,7 +43,6 @@ while game_continue:
         else:
             return user_input == 'b'
 
-    # todo: stop the game when the user fails and print out score
     if not check_answer(user_guess, get_followers(detail_index_A), get_followers(detail_index_B)):
         # Clear the screen after failure and print final score
         print("\n"*50 + logo)
@@ -58,5 +54,5 @@ while game_continue:
             detail_index_B = randint(0, 49)
 
         user_score += 1
+        # clear screen for starting over
         print("\n" * 50)
-        
