@@ -46,21 +46,37 @@ def process_coins(qtrs, dme, nckl, pnny):
     total_value = (QUARTERS*qtrs) + (DIME*dme) + (NICKEL*nckl) + (PENNY*pnny)
     return total_value
 
+def make_espresso(resources_water, resources_coffee):
+    """Calculates the resources to be deducted when making an espresso"""
+    espresso_water = MENU['espresso']['ingredients']['water']
+    espresso_coffee = MENU['espresso']['ingredients']['coffee']
+
+    if resources_water < espresso_water:
+        print("Not enough water to make an espresso!")
+    elif resources_coffee < espresso_coffee:
+        print("Not enough coffee to make and espresso!")
+    else:
+        resources['water'] = resources_water - espresso_water
+        resources['coffee'] = resources_coffee - espresso_coffee
+        print("Here is your espresso ☕️. Enjoy!")
+
 
 make_coffee = True
 while make_coffee:
     # todo: Prompt user by asking “What would you like? (espresso/latte/cappuccino):"
     user_coffee_choice = input("What would you like? (espresso/latte/cappuccino): ").lower()
+    # TEST ENVIRONMENT- TO BE DELETED
+    make_espresso(resources['water'], resources['coffee'])
+    # END OF TEST ENVIRONMENT
 
-    print("Please insert coins.")
-    user_quarters = int(input("How many quarters : "))
-    user_dimes = int(input("How many dimes : "))
-    user_nickels = int(input("How many nickels : "))
-    user_pennies = int(input("How many pennies : "))
-
-    print(process_coins(user_quarters, user_dimes, user_nickels, user_pennies))
-
-
+    # print("Please insert coins.")
+    # user_quarters = int(input("How many quarters : "))
+    # user_dimes = int(input("How many dimes : "))
+    # user_nickels = int(input("How many nickels : "))
+    # user_pennies = int(input("How many pennies : "))
+    #
+    # print(process_coins(user_quarters, user_dimes, user_nickels, user_pennies))
+    #
     # todo: Turn off the Coffee Machine by entering 'off' to the prompt
     if user_coffee_choice == 'off':
         make_coffee = False
