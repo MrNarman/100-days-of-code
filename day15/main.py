@@ -35,14 +35,17 @@ DIME = 0.10
 NICKEL = 0.05
 PENNY = 0.01
 
-# todo: print report
+money_collected = 0
+total_user_coins = 0
 def get_report():
+    """Prints the report on the remaining resources"""
     print(f"Water: {resources["water"]}ml")
     print(f"Milk: {resources["milk"]}ml")
     print(f"Coffee: {resources["coffee"]}g")
+    print(f"Money: $ {money_collected}")
 
-# todo: process coins
 def process_coins(qtrs, dme, nckl, pnny):
+    """Processes the total of the coins offered by the user/customer"""
     total_value = (QUARTERS*qtrs) + (DIME*dme) + (NICKEL*nckl) + (PENNY*pnny)
     return total_value
 
@@ -97,29 +100,74 @@ def make_cappuccino(resources_water, resources_milk, resources_coffee):
         resources['coffee'] = resources_coffee - cappuccino_coffee
         print("Here is your cappuccino ☕️. Enjoy!")
 
+def serve_espresso():
+    if total_user_coins >= (MENU['espresso']['cost']):
+        print(f"Here is $ {round(total_user_coins - (MENU['espresso']['cost']), 2)} in change. ")
+        make_espresso(resources['water'], resources['coffee'])
+
+    else:
+        print(f"$ {round(total_user_coins, 2)} is NOT enough for an espresso. Money refund.")
+
+def serve_latte():
+    if total_user_coins >= (MENU['latte']['cost']):
+        print(f"Here is $ {round(total_user_coins - (MENU['latte']['cost']), 2)} in change. ")
+        make_latte(resources['water'], resources['milk'], resources['coffee'])
+
+    else:
+        print(f"$ {round(total_user_coins, 2)} is NOT enough for a latte. Money refund.")
+
+def serve_cappuccino():
+    if total_user_coins >= (MENU['cappuccino']['cost']):
+        print(f"Here is $ {round(total_user_coins - (MENU['cappuccino']['cost']), 2)} in change. ")
+        make_cappuccino(resources['water'], resources['milk'], resources['coffee'])
+
+    else:
+        print(f"$ {round(total_user_coins, 2)} is NOT enough for a cappuccino. Money refund.")
+
+# def serve_cappuccino():
 
 make_coffee = True
 while make_coffee:
-    # todo: Prompt user by asking “What would you like? (espresso/latte/cappuccino):"
     user_coffee_choice = input("What would you like? (espresso/latte/cappuccino): ").lower()
-    # TEST ENVIRONMENT- TO BE DELETED
-    make_cappuccino(resources['water'], resources['milk'], resources['coffee'])
-    # END OF TEST ENVIRONMENT
-
-    # print("Please insert coins.")
-    # user_quarters = int(input("How many quarters : "))
-    # user_dimes = int(input("How many dimes : "))
-    # user_nickels = int(input("How many nickels : "))
-    # user_pennies = int(input("How many pennies : "))
-    #
-    # print(process_coins(user_quarters, user_dimes, user_nickels, user_pennies))
-    #
-    # todo: Turn off the Coffee Machine by entering 'off' to the prompt
     if user_coffee_choice == 'off':
         make_coffee = False
     elif user_coffee_choice == 'report':
         get_report()
 
-# todo: check resources sufficient
+    elif user_coffee_choice == 'espresso':
+        print("Please insert coins.")
+        quarters = int(input("How many quarters : "))
+        dimes = int(input("How many dimes : "))
+        nickels = int(input("How many nickels : "))
+        pennies = int(input("How many pennies : "))
+
+        total_user_coins = process_coins(quarters, dimes, nickels, pennies)
+        serve_espresso()
+        money_collected += (MENU['espresso']['cost'])
+
+    elif user_coffee_choice == 'latte':
+        print("Please insert coins.")
+        quarters = int(input("How many quarters : "))
+        dimes = int(input("How many dimes : "))
+        nickels = int(input("How many nickels : "))
+        pennies = int(input("How many pennies : "))
+
+        total_user_coins = process_coins(quarters, dimes, nickels, pennies)
+        serve_latte()
+        money_collected += (MENU['latte']['cost'])
+
+    elif user_coffee_choice == 'cappuccino':
+        print("Please insert coins.")
+        quarters = int(input("How many quarters : "))
+        dimes = int(input("How many dimes : "))
+        nickels = int(input("How many nickels : "))
+        pennies = int(input("How many pennies : "))
+
+        total_user_coins = process_coins(quarters, dimes, nickels, pennies)
+        serve_cappuccino()
+        money_collected += (MENU['latte']['cost'])
+
+    else:
+        print("Invalid entry!")
+
 # todo: check transaction successful
-# todo: make coffee and deduct the resources
