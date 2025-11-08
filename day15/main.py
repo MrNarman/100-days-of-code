@@ -25,7 +25,7 @@ MENU = {
 }
 
 resources = {
-    "water": 50,
+    "water": 300,
     "milk": 200,
     "coffee": 100
 }
@@ -66,7 +66,6 @@ def make_espresso(resources_water, resources_coffee):
         resources['water'] = resources_water - espresso_water
         resources['coffee'] = resources_coffee - espresso_coffee
         return True
-
 
 def make_latte(resources_water, resources_milk, resources_coffee):
     """Calculates the resources to be deducted when making a latte"""
@@ -121,7 +120,6 @@ def serve_espresso():
     if total_user_coins >= (MENU['espresso']['cost']):
         print(f"Here is $ {round(total_user_coins - (MENU['espresso']['cost']), 2)} in change. ")
         print("Here is your espresso ☕️. Enjoy!")
-        # make_espresso(resources['water'], resources['coffee'])
     else:
         print(f"$ {round(total_user_coins, 2)} is NOT enough for an espresso. Money refund.")
 
