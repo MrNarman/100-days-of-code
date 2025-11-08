@@ -25,7 +25,7 @@ MENU = {
 }
 
 resources = {
-    "water": 300,
+    "water": 50,
     "milk": 200,
     "coffee": 100
 }
@@ -56,12 +56,17 @@ def make_espresso(resources_water, resources_coffee):
 
     if resources_water < espresso_water:
         print("Not enough water to make an espresso!")
+        print(f"$ {total_user_coins} refund")
+        return False
     elif resources_coffee < espresso_coffee:
         print("Not enough coffee to make an espresso!")
+        print(f"$ {total_user_coins} refund")
+        return False
     else:
         resources['water'] = resources_water - espresso_water
         resources['coffee'] = resources_coffee - espresso_coffee
-        print("Here is your espresso ☕️. Enjoy!")
+        return True
+
 
 def make_latte(resources_water, resources_milk, resources_coffee):
     """Calculates the resources to be deducted when making a latte"""
@@ -71,15 +76,21 @@ def make_latte(resources_water, resources_milk, resources_coffee):
 
     if resources_water < latte_water:
         print("Not enough water to make an latte!")
+        print(f"$ {total_user_coins} refund")
+        return False
     elif resources_milk < latte_milk:
         print("Not enough milk to make a latte!")
+        print(f"$ {total_user_coins} refund")
+        return False
     elif resources_coffee < latte_coffee:
         print("Not enough coffee to make a latte!")
+        print(f"$ {total_user_coins} refund")
+        return False
     else:
         resources['water'] = resources_water - latte_water
         resources['milk'] = resources_milk - latte_milk
         resources['coffee'] = resources_coffee - latte_coffee
-        print("Here is your latte ☕️. Enjoy!")
+        return True
 
 
 def make_cappuccino(resources_water, resources_milk, resources_coffee):
@@ -90,28 +101,34 @@ def make_cappuccino(resources_water, resources_milk, resources_coffee):
 
     if resources_water < cappuccino_water:
         print("Not enough water to make a cappuccino!")
+        print(f"$ {total_user_coins} refund")
+        return False
     elif resources_milk < cappuccino_milk:
         print("Not enough milk to make a cappuccino!")
+        print(f"$ {total_user_coins} refund")
+        return False
     elif resources_coffee < cappuccino_coffee:
         print("Not enough coffee to make a cappuccino!")
+        print(f"$ {total_user_coins} refund")
+        return False
     else:
         resources['water'] = resources_water - cappuccino_water
         resources['milk'] = resources_milk - cappuccino_milk
         resources['coffee'] = resources_coffee - cappuccino_coffee
-        print("Here is your cappuccino ☕️. Enjoy!")
+        return True
 
 def serve_espresso():
     if total_user_coins >= (MENU['espresso']['cost']):
         print(f"Here is $ {round(total_user_coins - (MENU['espresso']['cost']), 2)} in change. ")
-        make_espresso(resources['water'], resources['coffee'])
-
+        print("Here is your espresso ☕️. Enjoy!")
+        # make_espresso(resources['water'], resources['coffee'])
     else:
         print(f"$ {round(total_user_coins, 2)} is NOT enough for an espresso. Money refund.")
 
 def serve_latte():
     if total_user_coins >= (MENU['latte']['cost']):
         print(f"Here is $ {round(total_user_coins - (MENU['latte']['cost']), 2)} in change. ")
-        make_latte(resources['water'], resources['milk'], resources['coffee'])
+        print("Here is your latte ☕️. Enjoy!")
 
     else:
         print(f"$ {round(total_user_coins, 2)} is NOT enough for a latte. Money refund.")
@@ -119,12 +136,10 @@ def serve_latte():
 def serve_cappuccino():
     if total_user_coins >= (MENU['cappuccino']['cost']):
         print(f"Here is $ {round(total_user_coins - (MENU['cappuccino']['cost']), 2)} in change. ")
-        make_cappuccino(resources['water'], resources['milk'], resources['coffee'])
+        print("Here is your cappuccino ☕️. Enjoy!")
 
     else:
         print(f"$ {round(total_user_coins, 2)} is NOT enough for a cappuccino. Money refund.")
-
-# def serve_cappuccino():
 
 make_coffee = True
 while make_coffee:
@@ -142,8 +157,9 @@ while make_coffee:
         pennies = int(input("How many pennies : "))
 
         total_user_coins = process_coins(quarters, dimes, nickels, pennies)
-        serve_espresso()
-        money_collected += (MENU['espresso']['cost'])
+        if make_espresso(resources['water'], resources['coffee']):
+            serve_espresso()
+            money_collected += (MENU['espresso']['cost'])
 
     elif user_coffee_choice == 'latte':
         print("Please insert coins.")
@@ -153,8 +169,9 @@ while make_coffee:
         pennies = int(input("How many pennies : "))
 
         total_user_coins = process_coins(quarters, dimes, nickels, pennies)
-        serve_latte()
-        money_collected += (MENU['latte']['cost'])
+        if make_latte(resources['water'], resources['milk'],resources['coffee']):
+            serve_latte()
+            money_collected += (MENU['latte']['cost'])
 
     elif user_coffee_choice == 'cappuccino':
         print("Please insert coins.")
@@ -164,10 +181,9 @@ while make_coffee:
         pennies = int(input("How many pennies : "))
 
         total_user_coins = process_coins(quarters, dimes, nickels, pennies)
-        serve_cappuccino()
-        money_collected += (MENU['latte']['cost'])
+        if make_cappuccino(resources['water'], resources['milk'], resources['coffee']):
+            serve_cappuccino()
+            money_collected += (MENU['latte']['cost'])
 
     else:
         print("Invalid entry!")
-
-# todo: check transaction successful
