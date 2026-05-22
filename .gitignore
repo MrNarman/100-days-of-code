@@ -6,6 +6,7 @@ venv/
 # Editor config files
 .vscode/
 .idea/
+.idea
 
 # Environment variable files
 .env
