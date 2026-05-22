@@ -9,4 +9,4 @@ screen = Screen()
 screen.listen()
 screen.onkey(key= "space", fun= move_forward)
 
-screen.exitonclick()
+screen.exitonclick() 
