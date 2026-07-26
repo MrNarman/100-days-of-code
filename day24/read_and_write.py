@@ -2,9 +2,9 @@
 #     content =  trial_file.read()
 #     print(content)
 
-with open("trial.txt", "a") as file:
+with open("/home/mrnarman/CODE/trial.txt", "a") as file:
     file.write("\nWelcome to kenya")
 
-with open("new_file.txt", "w") as wfile:
-    wfile.write("banana")
+# with open("new_file.txt", "w") as wfile:
+#     wfile.write("banana")
     
